@@ -26,8 +26,8 @@ User.init(
     email: {
       type: S.STRING,
       allowNull: false,
+      unique:true,
       validate: {
-        unique:true,
         isEmail:true,
         notEmpty:true
       },
@@ -48,9 +48,9 @@ User.init(
     },
     phone:{
       type:S.STRING,
-      validate:{
-        is:[/^[+][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]$/g]
-      }
+      // validate:{
+      //   is:[/^[+][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]$/g]
+      // }
     },
     shipping_address:{
       type:S.ARRAY(S.STRING)
