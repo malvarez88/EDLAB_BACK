@@ -7,7 +7,7 @@ Product.init(
   {
     name: {
       type: S.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: {
         notEmpty: true,
         len: [3, 30],
@@ -16,14 +16,14 @@ Product.init(
     },
     description: {
       type: S.TEXT,
-      allowNull: true,
+      allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     price: {
       type: S.DECIMAL,
-      allowNull: true,
+      allowNull: false,
       validate: {
         min: 0, //no puede ser menor que 0!
       },
@@ -33,7 +33,7 @@ Product.init(
     },
     stock: {
       type: S.INTEGER,
-      allowNull: true,
+      allowNull: false,
       validate: {
         min: 0, //no puede haber stock negativo!
       },
