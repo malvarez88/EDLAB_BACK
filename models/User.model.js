@@ -7,7 +7,7 @@ User.init(
   {
     first_name: {
       type: S.STRING,
-      allowNull: false,
+      //allowNull: false,
       validate: {
         notEmpty: true,
         len: [3, 30],
@@ -16,7 +16,7 @@ User.init(
     },
     last_name: {
       type: S.STRING,
-      allowNull: false,
+      //allowNull: false,
       validate: {
         notEmpty: true,
         len:[3,35],
@@ -25,7 +25,7 @@ User.init(
     },
     email: {
       type: S.STRING,
-      allowNull: false,
+      //allowNull: false,
       unique:true,
       validate: {
         isEmail:true,
@@ -40,7 +40,7 @@ User.init(
     },
     password: {
       type: S.STRING,
-      allowNull: false,
+      //allowNull: false,
       validate: {
         len:[7,30],
         is:[/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/g]
