@@ -17,8 +17,11 @@ Order.init(
       allowNull:false
     },
     order_status:{
-      type:S.ENUM("REJECTED","PENDING","APPROVED"),
-      allowNull: false
+      type:S.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [["rejected","pending","approved"]]
+      }
     }
 
   },
