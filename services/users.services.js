@@ -9,4 +9,12 @@ module.exports = {
       console.error(err);
     }
   },
+  logIn : async (userData) => {
+    try {
+      const userLogged = await User.findOne({where:userData});
+      return userLogged;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 };
