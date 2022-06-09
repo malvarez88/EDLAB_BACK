@@ -26,13 +26,16 @@ const verifyToken = async (req,res,next) => {
 }
 
 const logIn = async (req, res, next) => {
-    console.log("hola")
     const dataUser = req.body
+    if (!dataUser || !dataUser.email) return res.status(400).json({message:'No user provided'})
     try {
       const userLogged = await userService.logIn(dataUser)
-      if (!userLogged) return res.status(400).json({message:'Unauthorized'})
+      if (!userLogged) return res.status(401).json({message:'User not found'})
+      const passComprobation = await userLogged.comparePassword(dataUser.password)
+      if (!passComprobation) return res.status(401).json({message:'Wrong password'})
       const token = jwt.sign({id:userLogged.id,role: userLogged.isAdmin},SECRET,{expiresIn:20000})
-      res.json({token})
+      const {password,...user} = userLogged["dataValues"]
+      res.json({user,token})
     } catch (err) {
       next(err);
     }
