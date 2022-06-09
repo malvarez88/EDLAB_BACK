@@ -6,6 +6,7 @@ module.exports = {
       const userCreated = await userServices.register(req.body)
       res.status(201).json(userCreated);
     } catch (err) {
+      console.log(err)
       next(err);
     }
   },
@@ -18,7 +19,7 @@ module.exports = {
         next (err)
     }
 },
-deleteFromCart: async (req, res, next) => {
+  deleteFromCart: async (req, res, next) => {
     const product = req.body
     try {
         const deleteProduct = await cartServices.deleteFromCart(product)

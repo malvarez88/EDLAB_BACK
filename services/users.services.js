@@ -1,13 +1,10 @@
 const User = require("../models/User.model");
+const Cart = require("../models/Cart.model");
 
 module.exports = {
   register: async (userData) => {
-    try {
       const userCreated = await User.create(userData);
       return userCreated;
-    } catch (err) {
-      console.error(err);
-    }
   },
   logIn : async (userData) => {
     try {
@@ -19,7 +16,7 @@ module.exports = {
   },
   addToCart: async (product) => {
     try {
-        const order = await OrderDetails.findOrCreate({
+        const order = await Cart.findOrCreate({
             where: {
                 id: product.id
             }
