@@ -11,7 +11,7 @@ module.exports = {
   },
   logIn : async (userData) => {
     try {
-      const userLogged = await User.findOne({where:userData});
+      const userLogged = await User.findOne({where:{email:userData.email}});
       return userLogged;
     } catch (err) {
       console.error(err);

@@ -5,7 +5,7 @@ const authJwt = require("../middleware/authjwt")
 
 
 /* GET users listing. */
-router.post('/register', usersController.register);
+router.post('/register',usersController.register);
 router.post('/login',authJwt.logIn)
 router.post('/add', usersController.addToCart)
 

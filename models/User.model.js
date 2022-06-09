@@ -1,7 +1,16 @@
 const S = require("sequelize");
 const db = require("../config/db");
+const bcrypt = require('bcrypt')
 
-class User extends S.Model {}
+class User extends S.Model {
+  encryptPassword(password,salt){
+    return bcrypt.hash(password,salt)
+  }  
+  async comparePassword(password){
+    return bcrypt.compare(password,this.password)
+  }
+
+}
 
 User.init(
   {
@@ -67,5 +76,16 @@ User.init(
   },
   { sequelize: db, modelName: "users" }
 );
+
+User.beforeCreate(async (user)=>{
+  if (!user.password) return
+  try{
+      const salt = await bcrypt.genSalt(10)
+      const passwordHash = await user.encryptPassword(user.password,salt)
+      user.password = passwordHash
+  }catch(e){
+      throw new Error("ERROR PASSWORD")
+  }
+})
 
 module.exports = User;
