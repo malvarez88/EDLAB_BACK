@@ -44,6 +44,7 @@ User.init(
       validate: {
         len:[7,30],
         is:[/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/g]
+        //una mayuscula, 7 letras y 1 numero.
       }
     },
     phone:{

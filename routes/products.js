@@ -5,7 +5,6 @@ const authJwt = require("../middleware/authjwt")
 
 router.get('/', productsController.getAll)
 router.get('/:id', productsController.getById)
-
 router.post('/add',authJwt.verifyToken,productsController.addProduct)
 router.delete('/:id',authJwt.verifyToken,productsController.deleteProduct)
 router.put('/:id',authJwt.verifyToken,productsController.updateProduct)

@@ -3,6 +3,7 @@ const router = express.Router();
 const productsRouter = require ('./products');
 const usersRouter = require('./users');
 
+
 const categoriesRouter = require('./categories');
 
 

@@ -2,7 +2,7 @@ const S = require("sequelize");
 const db = require("../config/db");
 
 class Order_detail extends S.Model {}
-
+//CADA PRODUCTO
 Order_detail.init(
   {
     price: {
