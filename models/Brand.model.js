@@ -18,3 +18,5 @@ Brand.init(
 );
 
 module.exports = Brand;
+
+
