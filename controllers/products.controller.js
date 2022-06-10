@@ -3,13 +3,13 @@ const categoriesServices = require ('../services/categories.services');
 
 module.exports = {
   getAll: async (req, res, next) => {
-    console.log(req.user)
     const category = req.query.category;
     const productName = req.query.name;
+
     if (!category) {
       try {
         const allProducts = await productService.getAll(productName);
-        res.send(allProducts);
+        res.json(allProducts);
       } catch (err) {
         next(err);
       }

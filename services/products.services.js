@@ -7,9 +7,10 @@ module.exports = {
     try {
       const allProducts = await Product.findAll({
         where: {
-          name: {
-            [Op.substring]: productName,
-          },
+          /* name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + productName.toLowerCase() + '%') */
+          name:{
+            [Op.iLike]:`%${productName}%`
+          }
         },
       });
       return allProducts;
