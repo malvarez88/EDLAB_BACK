@@ -4,7 +4,7 @@ const User = require("../models/User.model")
 const userService = require("../services/users.services")
 
 const verifyToken = async (req,res,next) => {
-  console.log(req.headers["x-access-token"])
+    console.log("hola")
     const token = req.headers["x-access-token"]
     if (!token) return res.status(400).json({message:'No token provided'})
 

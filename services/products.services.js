@@ -1,9 +1,10 @@
 const Product = require("../models/Product.model");
 const Category = require("../models/Category.model");
 const { Op } = require("sequelize");
+const Brand = require("../models/Brand.model");
 
 module.exports = {
-  getAll: async (productName) => {
+  getAll: async (productName,category,price,brand) => {
     try {
       const allProducts = await Product.findAll({
         where: {
@@ -16,6 +17,31 @@ module.exports = {
       return allProducts;
     } catch (err) {
       console.error(err);
+    }
+  },
+  getByQuery: async (query) =>{
+    try{
+      const products = await Product.findAll({where:{
+        name:{
+          [Op.iLike]:`%${productName}%`
+        }
+      },include:[{
+        model: Category,
+        where:{
+          name:{
+            [Op.iLike]:`%${query}%`
+          }
+        }},{
+        model: Brand,
+        where: {
+          name:{
+            [Op.iLike]:`%${query}%`
+          }
+        } 
+        }]
+    })
+    }catch(err){
+      console.error(err)
     }
   },
   getByCategory: async (category) => {

@@ -1,5 +1,6 @@
 const productService = require("../services/products.services");
 const categoriesServices = require ('../services/categories.services');
+const brandServices = require("../services/brands.services")
 
 module.exports = {
   getAll: async (req, res, next) => {
@@ -33,12 +34,16 @@ module.exports = {
   },
   addProduct: async (req, res, next) => {
       const category = req.body.category;
-      if(!category) return res.status(400).json({message: 'Bad Request: category id is needed'});
+      const brand = req.body.brand;
+      if(!category) return res.status(400).json({message: 'Bad Request: category is needed'});
+      if(!brand) return res.status(400).json({message: 'Bad Request: brand is needed'});
     try {
-      const newProduct = await productService.addProduct(req.body);
-      const productCategory = await categoriesServices.getById(category.id)
-      newProduct.setCategories(productCategory);
-      res.status(201).json(newProduct);
+      const productCategory = await categoriesServices.getByName(category)  
+      const productBrand = await brandServices.getByName(brand) 
+      const newProduct = await productService.addProduct(req.body)
+      newProduct.setCategories(productCategory)
+      const nose = await newProduct.setBrand(productBrand)
+      res.status(201).json(newProduct)
     } catch (err) {
       next(err);
     }

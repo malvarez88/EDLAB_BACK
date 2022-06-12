@@ -22,6 +22,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
+  console.log(err)
   let errores = []
   err["errors"].forEach(error=>{
       let typeError = error["validatorName"]  

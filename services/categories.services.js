@@ -14,6 +14,14 @@ module.exports = {
       console.error(err);
     }
   },
+  getByName: async(name) =>{
+    try {
+      const categoryData = await Category.findOne({where:{name}})
+      return categoryData;
+    } catch (err) {
+      console.error(err)
+    }
+  },
   getById: async(id) => {
     try {
         const categoryData = await Category.findByPk(id
