@@ -1,26 +1,17 @@
 const productService = require("../services/products.services");
-const categoriesServices = require ('../services/categories.services');
+const categoriesServices = require ("../services/categories.services");
 const brandServices = require("../services/brands.services")
 
 module.exports = {
   getAll: async (req, res, next) => {
-    const category = req.query.category;
-    const productName = req.query.name;
-
-    if (!category) {
-      try {
-        const allProducts = await productService.getAll(productName);
-        res.json(allProducts);
-      } catch (err) {
-        next(err);
-      }
-    } else {
-      try {
-        const productByCategory = await productService.getByCategory(category);
-        res.send(productByCategory);
-      } catch (err) {
-        next(err);
-      }
+    const {name,category,brand} = req.query
+    try{
+      const allProducts = await productService.getByQuery(name,category,brand)
+      console.log(allProducts)
+      res.json(allProducts)
+    }catch(e){
+      console.log(e)
+      next(e)
     }
   },
   getById: async (req, res, next) => {
@@ -35,14 +26,14 @@ module.exports = {
   addProduct: async (req, res, next) => {
       const category = req.body.category;
       const brand = req.body.brand;
-      if(!category) return res.status(400).json({message: 'Bad Request: category is needed'});
-      if(!brand) return res.status(400).json({message: 'Bad Request: brand is needed'});
+      if(!category) return res.status(400).json({message: "Bad Request: category is needed"});
+      if(!brand) return res.status(400).json({message: "Bad Request: brand is needed"});
     try {
       const productCategory = await categoriesServices.getByName(category)  
       const productBrand = await brandServices.getByName(brand) 
       const newProduct = await productService.addProduct(req.body)
-      newProduct.setCategories(productCategory)
-      const nose = await newProduct.setBrand(productBrand)
+      newProduct.setCategory(productCategory)
+      newProduct.setBrand(productBrand)
       res.status(201).json(newProduct)
     } catch (err) {
       next(err);

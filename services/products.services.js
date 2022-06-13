@@ -8,7 +8,7 @@ module.exports = {
     try {
       const allProducts = await Product.findAll({
         where: {
-          /* name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + productName.toLowerCase() + '%') */
+          /* name: sequelize.where(sequelize.fn("LOWER", sequelize.col("name")), "LIKE", "%" + productName.toLowerCase() + "%") */
           name:{
             [Op.iLike]:`%${productName}%`
           }
@@ -19,27 +19,30 @@ module.exports = {
       console.error(err);
     }
   },
-  getByQuery: async (query) =>{
+  getByQuery: async (name="",category="",brand="") =>{
     try{
       const products = await Product.findAll({where:{
         name:{
-          [Op.iLike]:`%${productName}%`
+          [Op.iLike]:`%${name}%`
         }
       },include:[{
         model: Category,
+        as:"category",
         where:{
           name:{
-            [Op.iLike]:`%${query}%`
+            [Op.iLike]:`%${category}%`
           }
         }},{
         model: Brand,
+        as:"brand",
         where: {
           name:{
-            [Op.iLike]:`%${query}%`
+            [Op.iLike]:`%${brand}%`
           }
         } 
         }]
     })
+    return products
     }catch(err){
       console.error(err)
     }

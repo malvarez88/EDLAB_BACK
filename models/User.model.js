@@ -1,6 +1,6 @@
 const S = require("sequelize");
 const db = require("../config/db");
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt")
 
 class User extends S.Model {
   encryptPassword(password,salt){

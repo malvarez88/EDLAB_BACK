@@ -1,3 +1,3 @@
 module.exports = {
-    SECRET:'edlab'
+    SECRET:"edlab"
 }

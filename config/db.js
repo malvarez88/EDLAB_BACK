@@ -1,8 +1,8 @@
 
-const Sequelize = require('sequelize')
+const Sequelize = require("sequelize")
 
-const db = new Sequelize("edlab",'postgres', 'rodri15359248', {
-  dialect: 'postgres',
+const db = new Sequelize("edlab","postgres", "rodri15359248", {
+  dialect: "postgres",
   logging: false,
 });
 

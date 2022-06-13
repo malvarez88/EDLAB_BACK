@@ -1,4 +1,4 @@
-const categoriesServices = require ('../services/categories.services')
+const categoriesServices = require ("../services/categories.services")
 
 module.exports = {
     getAll : async (req, res, next) => {
