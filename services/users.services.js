@@ -14,14 +14,15 @@ module.exports = {
       console.error(err);
     }
   },
-  addToCart: async (product) => {
+  addToCart: async (product,user) => {
     try {
-        const order = await Cart.findOrCreate({
+        const userCart = await Cart.findOrCreate({
             where: {
-                id: product.id
+                userId: user.id,
+                order_status: "pending"
             }
         })
-        const orderCreated = await Cart.create(order)
+        const orderCreated = await userCart.create(order)
         return orderCreated;
     } catch (err) {
         console.error(err)

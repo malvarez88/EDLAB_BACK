@@ -9,7 +9,7 @@ const products_list = [
     {
         id:1,
         name: "Alcatel 3H",
-        description: "Tamaño de la pantalla: 6.52 "(165.64 mm x 75.59 mm x 8.8 mm)",
+        description: "Tamaño de la pantalla: 6.52 (165.64 mm x 75.59 mm x 8.8 mm)",
         price: 33199,
         image: ["https://http2.mlstatic.com/D_NQ_NP_2X_705727-MLA47762780436_102021-F.webp","https://http2.mlstatic.com/D_NQ_NP_666595-MLA47752720383_102021-O.webp","https://http2.mlstatic.com/D_NQ_NP_862968-MLA47752638548_102021-O.webp","https://http2.mlstatic.com/D_NQ_NP_940163-MLA47752638549_102021-O.webp"],
         stock: 4,
