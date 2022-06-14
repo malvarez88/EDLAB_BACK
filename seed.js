@@ -1,7 +1,5 @@
-const { faker } = require('@faker-js/faker');
 const Categories = require("./models/Category.model")
 const Brand = require("./models/Brand.model")
-const ProductsCategories = require("./models/ProductsCategories.model")
 const Products = require("./models/Product.model");
 const db = require("./config/db");
 
