@@ -10,4 +10,7 @@ router.post("/add",authJwt.verifyToken,usersController.addToCart)
 router.post("/remove",authJwt.verifyToken,usersController.deleteFromCart)
 router.post("/buy",authJwt.verifyToken,usersController.buyConfirm)
 
+router.get("/",usersController.getAll)
+router.delete("/:id",usersController.deleteUser)
+
 module.exports = router;
