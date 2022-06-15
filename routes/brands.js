@@ -1,8 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const brandsController = require('../controllers/brands.controller');
-const authJwt = require('../middleware/authjwt')
+const brandsController = require("../controllers/brands.controller");
+const authJwt = require("../middleware/authjwt")
 
-router.post('/add',brandsController.addBrand)
+router.get("/",brandsController.getAll)
+router.post("/add",brandsController.addBrand)
 
 module.exports = router;

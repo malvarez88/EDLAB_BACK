@@ -7,14 +7,13 @@ Order_detail.init(
   {
     price: {
       type: S.DECIMAL,
-      allowNull: false,
       validate:{
           min:0
       }
     },
     quantity:{
       type: S.INTEGER,
-      allowNull:false,
+      defaultValue:0,
       validate:{
           min:0
       }

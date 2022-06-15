@@ -21,6 +21,7 @@ Cart.init(
     order_status: {
       type: S.STRING,
       allowNull: false,
+      defaultValue:"pending",
       validate: {
         isIn: [["rejected","pending","approved"]]
       }
