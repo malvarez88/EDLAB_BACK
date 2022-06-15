@@ -2,6 +2,22 @@ const User = require("../models/User.model");
 const Cart = require("../models/Cart.model");
 
 module.exports = {
+  getAll: async()=>{
+    try {
+        const allUsers = await User.findAll()
+        return allUsers
+    } catch (error) {
+        throw new Error("Error getting users")
+    }
+  },
+  deleteUser: async(id) =>{
+    try{
+        const userDeleted = await User.destroy({where:{id}})
+        return userDeleted
+    }catch(e){
+        next(e)
+    }
+  },
   register: async (userData) => {
       const userCreated = await User.create(userData);
       return userCreated;

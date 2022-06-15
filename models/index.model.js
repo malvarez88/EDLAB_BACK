@@ -17,6 +17,9 @@ Cart.belongsTo(User,{ as:"user" })
 Brand.hasMany(Product, {as: "brand"})
 Product.belongsTo(Brand, {as: "brand"})
 
+User.belongsToMany(Product, {through: "User_reviews"})
+Product.belongsToMany(User, {through: "User_reviews"})
+
 module.exports = {Product,User,Cart,Order_detail,Brand};
 
 

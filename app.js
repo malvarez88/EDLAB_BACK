@@ -17,10 +17,6 @@ app.use(cookieParser());
 
 app.use("/api", indexRouter);
 
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
 app.use(function(err, req, res, next) {
   console.log(err)
   if (!(Array.isArray(err))) return res.status(500).send({message:err.message|| "Error desconocido en el servidor"})

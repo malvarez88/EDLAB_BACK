@@ -1,13 +1,16 @@
 const productService = require("../services/products.services");
 const categoriesServices = require ("../services/categories.services");
-const brandServices = require("../services/brands.services")
+const brandServices = require("../services/brands.services");
+const productsServices = require("../services/products.services");
+const User_review = require("../models/User_review.model");
+const Order_detail = require("../models/Order_detail.model");
+
 
 module.exports = {
   getAll: async (req, res, next) => {
     const {name,category,brand} = req.query
     try{
       const allProducts = await productService.getByQuery(name,category,brand)
-      console.log(allProducts)
       res.json(allProducts)
     }catch(e){
       console.log(e)
@@ -21,6 +24,36 @@ module.exports = {
       res.send(product);
     } catch (err) {
       next(err);
+    }
+  },
+  getReviews: async (req,res,next)=>{
+    const productId = req.params.id
+    try{
+      const allReviews = await User_review.findAll({where:{productId},attributes:['review', 'stars']})
+      return res.json(allReviews)
+    }catch(error){
+      next(error)
+    }
+  },
+  addReview: async (req,res,next)=>{
+    const user = req.user
+    const productId = req.params.id
+    const {review,stars} = req.body
+    try{
+      const product = await productsServices.getById(productId)
+      if (!product) return res.status(404).json({message:"Product not Found"})
+      const reviewsCount = await User_review.count({where:{productId,userId:user.id}})
+      if (reviewsCount>0) return res.status(403).json({message:"The user has already reviewed this product"})
+      const reviewCreated = await product.addUsers(user)
+      if (!reviewCreated) return res.status(400).json({message:"The review already exist!"})
+      const newReview = await User_review.findOne({where:{productId,userId:user.id}})
+      newReview.review = review
+      newReview.stars = stars
+      await newReview.save()
+      console.log(newReview)
+      return res.json("OK")
+    }catch(error){
+      next(error)
     }
   },
   addProduct: async (req, res, next) => {
