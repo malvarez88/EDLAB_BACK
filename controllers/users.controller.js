@@ -3,6 +3,7 @@ const cartServices = require("../services/carts.services");
 const productsServices = require("../services/products.services");
 const orderDetailServices = require("../services/order_details.services");
 const Product = require("../models/Product.model");
+const Cart = require("../models/Cart.model");
 
 module.exports = {
   getAll: async (req,res,next)=>{
@@ -12,6 +13,17 @@ module.exports = {
       return res.json(allUsers)
     }catch(e){
       next(e)
+    }
+  },
+  getProducts: async (req,res,next)=>{
+    const userId = req.user.id
+    try{
+      const cart = await Cart.findOne({where:{userId,order_status:"pending"}})
+      if (!cart) return res.json({message:"Cart not found"})
+      const product = await cart.getProducts()
+      return res.json(product)
+    }catch(error){
+      next(error)
     }
   },
   deleteUser: async (req,res,next)=>{

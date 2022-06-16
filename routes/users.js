@@ -9,6 +9,7 @@ router.post("/login",authJwt.logIn)
 router.post("/add",authJwt.verifyToken,usersController.addToCart)
 router.post("/remove",authJwt.verifyToken,usersController.deleteFromCart)
 router.post("/buy",authJwt.verifyToken,usersController.buyConfirm)
+router.get("/get",authJwt.verifyToken,usersController.getProducts)
 
 router.get("/",usersController.getAll)
 router.delete("/:id",usersController.deleteUser)
