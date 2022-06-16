@@ -47,7 +47,7 @@ module.exports = {
         orderAdded.price = quantity*product.price
         orderAdded.quantity = quantity
         await orderAdded.save()
-        return res.json("OK")
+        return res.json({product,quantity})
     } catch (err) {
         next (err)
     }
@@ -62,7 +62,7 @@ module.exports = {
         const userCart = await cartServices.findCart(user)
         if (!userCart) return res.status(404).json({message:"Cart not found"})
         await userCart.removeProducts(productToRemove)
-        res.json("OK")
+        res.json(product)
     } catch (err) {
         next (err)
     }
